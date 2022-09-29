@@ -23,7 +23,10 @@ class TopCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.arrow_upward),
+                      Icon(
+                        Icons.arrow_upward,
+                        color: Colors.green,
+                      ),
                       Column(
                         children: [
                           Text('Ganhos'),
@@ -34,10 +37,13 @@ class TopCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.arrow_downward),
+                      Icon(
+                        Icons.arrow_downward,
+                        color: Colors.red,
+                      ),
                       Column(
                         children: [
-                          Text('Gastos'),
+                          Text('Despesas'),
                           Text('R\$200'),
                         ],
                       )
