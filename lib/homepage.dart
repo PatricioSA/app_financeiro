@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:app_financeiro/add_transacao_page.dart';
 import 'package:app_financeiro/util/top_card.dart';
 import 'package:flutter/material.dart';
