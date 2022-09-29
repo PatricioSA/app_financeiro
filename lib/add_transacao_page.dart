@@ -7,8 +7,7 @@ class NovaTransacao extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Nova Transação'),
-      content: SizedBox(
-        height: 200,
+      content: SingleChildScrollView(
         child: Column(
           children: [
             Row(
