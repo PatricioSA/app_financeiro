@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Transacoes extends StatelessWidget {
   final String nomeTransacao;
   final String tipoTransacao;
-  final String quantia;
+  final double quantia;
 
   Transacoes(
       {required this.nomeTransacao,
@@ -24,9 +24,9 @@ class Transacoes extends StatelessWidget {
         children: [
           Text(nomeTransacao),
           Text(
-            '${tipoTransacao == 'gasto' ? '- ' : '+ '}R\$$quantia',
+            '${tipoTransacao == 'despesa' ? '- ' : '+ '}R\$$quantia',
             style: TextStyle(
-                color: tipoTransacao == 'gasto' ? Colors.red : Colors.green),
+                color: tipoTransacao == 'despesa' ? Colors.red : Colors.green),
           ),
         ],
       ),

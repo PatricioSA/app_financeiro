@@ -11,35 +11,78 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController valorTransacao = TextEditingController();
+  TextEditingController nomeTransacao = TextEditingController();
+
+  List<dynamic> _transacoes = [
+    ['Transação 1', 'ganhos', 200],
+  ];
+
+  void pageNovaTransacao() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return NovaTransacao(
+          controllerNome: nomeTransacao,
+          controllerValor: valorTransacao,
+          onPressed: criarNovaTransacao,
+        );
+      },
+    );
+  }
+
+  void criarNovaTransacao() {
+    setState(() {
+      _transacoes.add([
+        nomeTransacao.text,
+        'despesa',
+        double.tryParse(valorTransacao.text)
+      ]);
+    });
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: Column(
-        children: [
-          TopCard(
-            balance: 'R\$5,000',
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 2,
-              itemBuilder: ((context, index) {
-                return Transacoes(
-                  nomeTransacao: 'Teste',
-                  tipoTransacao: 'gasto',
-                  quantia: '100',
-                );
-              }),
+      body: SafeArea(
+        child: Column(
+          children: [
+            //Texto de boas-vindas
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Olá, Usuário!',
+                    style: TextStyle(fontSize: 36),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            TopCard(
+              balance: 'R\$5,000',
+              ganhos: 600,
+              despesas: 100,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _transacoes.length,
+                itemBuilder: ((context, index) {
+                  return Transacoes(
+                    nomeTransacao: _transacoes[index][0],
+                    tipoTransacao: _transacoes[index][1],
+                    quantia: _transacoes[index][2],
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(context: context, builder: (context) {
-            return NovaTransacao();
-          });
-        },
+        onPressed: pageNovaTransacao,
         backgroundColor: Colors.grey,
         child: Icon(Icons.add),
       ),

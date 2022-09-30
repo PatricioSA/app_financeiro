@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class TopCard extends StatelessWidget {
   final String balance;
+  final double ganhos;
+  final double despesas;
 
-  TopCard({required this.balance});
+  TopCard({
+    required this.balance,
+    required this.ganhos,
+    required this.despesas,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +17,13 @@ class TopCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 200,
-        color: Colors.grey[200],
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12), color: Colors.blue),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Carteira', style: TextStyle(fontSize: 24)),
+              const Text('Carteira', style: TextStyle(fontSize: 24)),
               Text(balance, style: TextStyle(fontSize: 30)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -30,7 +37,7 @@ class TopCard extends StatelessWidget {
                       Column(
                         children: [
                           Text('Ganhos'),
-                          Text('R\$500'),
+                          Text(ganhos.toString()),
                         ],
                       ),
                     ],
@@ -44,7 +51,7 @@ class TopCard extends StatelessWidget {
                       Column(
                         children: [
                           Text('Despesas'),
-                          Text('R\$200'),
+                          Text(despesas.toString()),
                         ],
                       )
                     ],

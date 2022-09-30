@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NovaTransacao extends StatelessWidget {
-  const NovaTransacao({super.key});
+  VoidCallback onPressed;
+  TextEditingController controllerValor;
+  TextEditingController controllerNome;
+  bool isExpense = false;
+
+  NovaTransacao({
+    required this.onPressed,
+    required this.controllerValor,
+    required this.controllerNome,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +19,17 @@ class NovaTransacao extends StatelessWidget {
       content: SingleChildScrollView(
         child: Column(
           children: [
+            //Escolher tipo de transação
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text('Despesa'),
-                Switch(value: false, onChanged: (value) {},),
+                Switch(
+                  value: isExpense,
+                  onChanged: (value) {
+                    isExpense = value;
+                  },
+                ),
                 const Text('Ganhos'),
               ],
             ),
@@ -26,6 +41,7 @@ class NovaTransacao extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              controller: controllerValor,
             ),
             const SizedBox(
               height: 10,
@@ -38,10 +54,13 @@ class NovaTransacao extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              controller: controllerNome,
             ),
             const SizedBox(
               height: 20,
             ),
+
+            //Botões cancelar e adicionar
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -52,7 +71,7 @@ class NovaTransacao extends StatelessWidget {
                   child: const Text('Cancelar'),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onPressed,
                   child: const Text('Adicionar'),
                 ),
               ],
