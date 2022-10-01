@@ -4,12 +4,13 @@ class NovaTransacao extends StatelessWidget {
   VoidCallback onPressed;
   TextEditingController controllerValor;
   TextEditingController controllerNome;
-  bool isExpense = false;
+  List<Widget> children;
 
   NovaTransacao({
-    required this.onPressed,
     required this.controllerValor,
     required this.controllerNome,
+    required this.onPressed,
+    required this.children
   });
 
   @override
@@ -22,16 +23,7 @@ class NovaTransacao extends StatelessWidget {
             //Escolher tipo de transação
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text('Despesa'),
-                Switch(
-                  value: isExpense,
-                  onChanged: (value) {
-                    isExpense = value;
-                  },
-                ),
-                const Text('Ganhos'),
-              ],
+              children: children,
             ),
             TextField(
               keyboardType: TextInputType.number,

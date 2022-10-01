@@ -23,35 +23,35 @@ class TopCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text('Carteira', style: TextStyle(fontSize: 24)),
-              Text(balance, style: TextStyle(fontSize: 30)),
+              const Text('Carteira', style: TextStyle(fontSize: 26)),
+              Text(balance, style: const TextStyle(fontSize: 30)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.arrow_upward,
                         color: Colors.green,
                       ),
                       Column(
                         children: [
-                          Text('Ganhos'),
-                          Text(ganhos.toString()),
+                          const Text('Ganhos', style: TextStyle(fontSize: 18),),
+                          Text(ganhos.toString(), style: TextStyle(fontSize: 18),),
                         ],
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.arrow_downward,
                         color: Colors.red,
                       ),
                       Column(
                         children: [
-                          Text('Despesas'),
-                          Text(despesas.toString()),
+                          const Text('Despesas', style: TextStyle(fontSize: 18),),
+                          Text(despesas.toString(), style: TextStyle(fontSize: 18),),
                         ],
                       )
                     ],

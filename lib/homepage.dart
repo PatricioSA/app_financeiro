@@ -13,19 +13,36 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController valorTransacao = TextEditingController();
   TextEditingController nomeTransacao = TextEditingController();
+  bool isIncome = false;
 
-  List<dynamic> _transacoes = [
-    ['Transação 1', 'ganhos', 200],
-  ];
+  final List<dynamic> transacoes = [];
 
   void pageNovaTransacao() {
     showDialog(
       context: context,
       builder: (context) {
-        return NovaTransacao(
-          controllerNome: nomeTransacao,
-          controllerValor: valorTransacao,
-          onPressed: criarNovaTransacao,
+        return StatefulBuilder(
+          builder: ((context, setState) {
+
+            //Retornando minha página
+            return NovaTransacao(
+              controllerNome: nomeTransacao,
+              controllerValor: valorTransacao,
+              onPressed: criarNovaTransacao,
+              children: [
+                const Text('Despesa'),
+                Switch(
+                  value: isIncome,
+                  onChanged: (value) {
+                    setState(() {
+                      isIncome = !isIncome;
+                    });
+                  },
+                ),
+                const Text('Ganhos'),
+              ],
+            );
+          }),
         );
       },
     );
@@ -33,13 +50,38 @@ class _HomePageState extends State<HomePage> {
 
   void criarNovaTransacao() {
     setState(() {
-      _transacoes.add([
+      transacoes.add([
         nomeTransacao.text,
-        'despesa',
+        isIncome,
         double.tryParse(valorTransacao.text)
       ]);
     });
+    //Limpando os inputs
+    nomeTransacao.clear();
+    valorTransacao.clear();
+    isIncome = false;
+
     Navigator.of(context).pop();
+  }
+
+  double calculateIncome() {
+    double totalIncome = 0;
+    for (int i = 0; i < transacoes.length; i++) {
+      if (transacoes[i][1] == true) {
+        totalIncome += transacoes[i][2];
+      }
+    }
+    return totalIncome;
+  }
+
+  double calculateExpanse() {
+    double totalExpanse = 0;
+    for (int i = 0; i < transacoes.length; i++) {
+      if (transacoes[i][1] == false) {
+        totalExpanse += transacoes[i][2];
+      }
+    }
+    return totalExpanse;
   }
 
   @override
@@ -62,18 +104,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TopCard(
-              balance: 'R\$5,000',
-              ganhos: 600,
-              despesas: 100,
+              balance: 'R\$ ${calculateIncome() - calculateExpanse()}',
+              ganhos: calculateIncome(),
+              despesas: calculateExpanse(),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: _transacoes.length,
+                itemCount: transacoes.length,
                 itemBuilder: ((context, index) {
                   return Transacoes(
-                    nomeTransacao: _transacoes[index][0],
-                    tipoTransacao: _transacoes[index][1],
-                    quantia: _transacoes[index][2],
+                    nomeTransacao: transacoes[index][0],
+                    incomeOrExpanse: transacoes[index][1],
+                    quantia: transacoes[index][2],
                   );
                 }),
               ),

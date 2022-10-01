@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class Transacoes extends StatelessWidget {
   final String nomeTransacao;
-  final String tipoTransacao;
+  final bool incomeOrExpanse;
   final double quantia;
 
   Transacoes(
       {required this.nomeTransacao,
-      required this.tipoTransacao,
+      required this.incomeOrExpanse,
       required this.quantia});
 
   @override
@@ -24,9 +24,9 @@ class Transacoes extends StatelessWidget {
         children: [
           Text(nomeTransacao),
           Text(
-            '${tipoTransacao == 'despesa' ? '- ' : '+ '}R\$$quantia',
+            '${incomeOrExpanse == false ? '- ' : '+ '}R\$$quantia',
             style: TextStyle(
-                color: tipoTransacao == 'despesa' ? Colors.red : Colors.green),
+                color: incomeOrExpanse == false ? Colors.red : Colors.green),
           ),
         ],
       ),
