@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class Transacoes extends StatelessWidget {
   final String nomeTransacao;
-  final bool incomeOrExpanse;
+  final bool receitaOuDespesa;
   final double quantia;
 
-  Transacoes(
-      {required this.nomeTransacao,
-      required this.incomeOrExpanse,
-      required this.quantia});
+  const Transacoes({
+    super.key,
+    required this.nomeTransacao,
+    required this.receitaOuDespesa,
+    required this.quantia,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,9 @@ class Transacoes extends StatelessWidget {
         children: [
           Text(nomeTransacao),
           Text(
-            '${incomeOrExpanse == false ? '- ' : '+ '}R\$$quantia',
+            '${receitaOuDespesa == false ? '- ' : '+ '}R\$$quantia',
             style: TextStyle(
-                color: incomeOrExpanse == false ? Colors.red : Colors.green),
+                color: receitaOuDespesa == false ? Colors.red : Colors.green),
           ),
         ],
       ),

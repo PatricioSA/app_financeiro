@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class TopCard extends StatelessWidget {
   final String balance;
-  final double ganhos;
+  final double receitas;
   final double despesas;
 
-  TopCard({
+  const TopCard({
+    super.key,
     required this.balance,
-    required this.ganhos,
+    required this.receitas,
     required this.despesas,
   });
 
@@ -24,7 +25,10 @@ class TopCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Text('Carteira', style: TextStyle(fontSize: 26)),
+
+              //Valor total em carteira
               Text(balance, style: const TextStyle(fontSize: 30)),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -36,8 +40,14 @@ class TopCard extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          const Text('Ganhos', style: TextStyle(fontSize: 18),),
-                          Text(ganhos.toString(), style: TextStyle(fontSize: 18),),
+                          const Text(
+                            'Receitas',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            receitas.toString(),
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ],
                       ),
                     ],
@@ -50,14 +60,20 @@ class TopCard extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          const Text('Despesas', style: TextStyle(fontSize: 18),),
-                          Text(despesas.toString(), style: TextStyle(fontSize: 18),),
+                          const Text(
+                            'Despesas',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            despesas.toString(),
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

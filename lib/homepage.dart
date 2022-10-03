@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
       builder: (context) {
         return StatefulBuilder(
           builder: ((context, setState) {
-
             //Retornando minha página
             return NovaTransacao(
               controllerNome: nomeTransacao,
@@ -48,14 +47,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  validarInputs() {
+    if (valorTransacao.text == '' || nomeTransacao.text == '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void criarNovaTransacao() {
-    setState(() {
-      transacoes.add([
-        nomeTransacao.text,
-        isIncome,
-        double.tryParse(valorTransacao.text)
-      ]);
-    });
+    if (validarInputs() == true) {
+      setState(() {
+        transacoes.add([
+          nomeTransacao.text,
+          isIncome,
+          double.tryParse(valorTransacao.text)
+        ]);
+      });
+    }
     //Limpando os inputs
     nomeTransacao.clear();
     valorTransacao.clear();
@@ -64,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
-  double calculateIncome() {
+  double calcularReceita() {
     double totalIncome = 0;
     for (int i = 0; i < transacoes.length; i++) {
       if (transacoes[i][1] == true) {
@@ -74,7 +83,7 @@ class _HomePageState extends State<HomePage> {
     return totalIncome;
   }
 
-  double calculateExpanse() {
+  double calcularDespesas() {
     double totalExpanse = 0;
     for (int i = 0; i < transacoes.length; i++) {
       if (transacoes[i][1] == false) {
@@ -95,7 +104,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     'Olá, Usuário!',
                     style: TextStyle(fontSize: 36),
@@ -104,9 +113,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TopCard(
-              balance: 'R\$ ${calculateIncome() - calculateExpanse()}',
-              ganhos: calculateIncome(),
-              despesas: calculateExpanse(),
+              balance: 'R\$ ${calcularReceita() - calcularDespesas()}',
+              receitas: calcularReceita(),
+              despesas: calcularDespesas(),
             ),
             Expanded(
               child: ListView.builder(
@@ -114,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: ((context, index) {
                   return Transacoes(
                     nomeTransacao: transacoes[index][0],
-                    incomeOrExpanse: transacoes[index][1],
+                    receitaOuDespesa: transacoes[index][1],
                     quantia: transacoes[index][2],
                   );
                 }),
@@ -126,7 +135,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: pageNovaTransacao,
         backgroundColor: Colors.grey,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
