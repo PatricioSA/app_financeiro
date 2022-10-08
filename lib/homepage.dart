@@ -28,18 +28,14 @@ class _HomePageState extends State<HomePage> {
               controllerNome: nomeTransacao,
               controllerValor: valorTransacao,
               onPressed: criarNovaTransacao,
-              children: [
-                const Text('Despesa'),
-                Switch(
-                  value: isIncome,
-                  onChanged: (value) {
-                    setState(() {
-                      isIncome = !isIncome;
-                    });
-                  },
-                ),
-                const Text('Ganhos'),
-              ],
+              botaoSwitch: Switch(
+                value: isIncome,
+                onChanged: (value) {
+                  setState(() {
+                    isIncome = !isIncome;
+                  });
+                },
+              ),
             );
           }),
         );
@@ -114,8 +110,8 @@ class _HomePageState extends State<HomePage> {
             ),
             TopCard(
               balance: 'R\$ ${calcularReceita() - calcularDespesas()}',
-              receitas: calcularReceita(),
-              despesas: calcularDespesas(),
+              receitas: calcularReceita().toStringAsFixed(2),
+              despesas: calcularDespesas().toStringAsFixed(2),
             ),
             Expanded(
               child: ListView.builder(
