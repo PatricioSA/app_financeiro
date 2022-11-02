@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class TopCard extends StatelessWidget {
   final String balance;
-  final double receitas;
-  final double despesas;
+  final String receitas;
+  final String despesas;
 
   const TopCard({
     super.key,

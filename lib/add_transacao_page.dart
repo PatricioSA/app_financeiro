@@ -10,7 +10,7 @@ class NovaTransacao extends StatelessWidget {
     required this.controllerValor,
     required this.controllerNome,
     required this.onPressed,
-    required this.botaoSwitch
+    required this.botaoSwitch,
   });
 
   @override
