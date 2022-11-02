@@ -28,18 +28,14 @@ class _HomePageState extends State<HomePage> {
               controllerNome: nomeTransacao,
               controllerValor: valorTransacao,
               onPressed: criarNovaTransacao,
-              children: [
-                const Text('Despesa'),
-                Switch(
-                  value: isIncome,
-                  onChanged: (value) {
-                    setState(() {
-                      isIncome = !isIncome;
-                    });
-                  },
-                ),
-                const Text('Ganhos'),
-              ],
+              botaoSwitch: Switch(
+                value: isIncome,
+                onChanged: (value) {
+                  setState(() {
+                    isIncome = !isIncome;
+                  });
+                },
+              ),
             );
           }),
         );
