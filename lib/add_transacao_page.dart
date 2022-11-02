@@ -24,9 +24,9 @@ class NovaTransacao extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Despesas'),
+                const Text('Despesas'),
                 botaoSwitch,
-                Text('Receitas'),
+                const Text('Receitas'),
               ],
             ),
             TextField(
